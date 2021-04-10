@@ -9,6 +9,7 @@ There's a few assumptions made:
 2) Prime vs. secondary line probability is accurate
 
 If anyone wants to take this and make it better (honestly wouldn't be too difficult), please feel free.
+Please see the issues for some ideas for what I don't feel like doing, but can easily be done.
 
 Probability sources:
 http://whackybeanz.com/maple/extras/potential-list

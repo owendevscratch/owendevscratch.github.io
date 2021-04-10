@@ -9,10 +9,22 @@ function setupDropDown(){
     });
 }
 
+function expandDictionary(options){
+    var list = [];
+    // Build list of <weight> number of cases of each potential line
+    Object.keys(options).forEach( k => {
+        for(let i = 0; i < options[k]; i++){
+            list.push(k);
+        }
+    });
+    return list;
+}
+
 function selectLine(options){
     // TODO: Use weights in random selection
-    var index = Math.floor(Math.random() * Object.keys(options).length);
-    return Object.keys(options)[index];
+    var expandedList = expandDictionary(options);
+    var index = Math.floor(Math.random() * expandedList.length);
+    return expandedList[index];
 }
 
 function generateLines(){
