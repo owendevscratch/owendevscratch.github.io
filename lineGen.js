@@ -10,12 +10,13 @@ function setupDropDown(){
 }
 
 function selectLine(options){
+    // TODO: Use weights in random selection
     var index = Math.floor(Math.random() * Object.keys(options).length);
     return Object.keys(options)[index];
 }
 
 function generateLines(){
-    // TODO: Certain items cannot have special line combinations (ie: only max 2l boss on wse)
+    // TODO: Certain items cannot have special line combinations (ie: only max 2L boss on wse)
     var itemType = document.getElementById("itemType").value;
     var lineOptions = items[itemType];
     var lines = "";
