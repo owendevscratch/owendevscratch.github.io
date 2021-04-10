@@ -503,3 +503,35 @@ let items = {
         }
     }
 }
+
+let limitedLines = {
+    "Damage when attacking boss monsters +20%": "Boss",
+    "Damage when attacking boss monsters +30%": "Boss",
+    "Damage when attacking boss monsters +35%": "Boss",
+    "Damage when attacking boss monsters +40%": "Boss",
+    "Ignore Enemy Defense +30%": "IED",    
+    "Ignore Enemy Defense +35%": "IED",
+    "Ignore Enemy Defense +40%": "IED",
+    "Item Drop Rate +20%": "Drop",
+    "5% chance to ignore 20% damage when hit": "Ignore Damage",
+    "5% chance to ignore 40% damage when hit": "Ignore Damage",
+    "10% chance to ignore 20% damage when hit": "Ignore Damage",
+    "10% chance to ignore 40% damage when hit": "Ignore Damage",
+    "4% chance of being invincible for 7 seconds when hit": "Invincible Change",
+    "2% chance of being invincible for 7 seconds when hit": "Invincible Change",
+    "All Skill Levels +1": "Skill Increase",
+    "All Skill Levels +2": "Skill Increase",
+    "All Skill Levels +3": "Skill Increase",
+    "Invincibility time +2 seconds when hit": "Invincible Time",
+    "Invincibility time +3 seconds when hit": "Invincible Time"
+}
+
+let limitedLineGroup = {
+    "Boss": 2,
+    "IED": 2,
+    "Drop": 2,
+    "Ignore Damage": 2,
+    "Invincible Change": 2,
+    "Skill Increase": 1,
+    "Invincible Time": 1
+}

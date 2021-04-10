@@ -9,10 +9,39 @@ function setupDropDown(){
     });
 }
 
-function expandDictionary(options){
+function findMaxedLines(selectedLines){
+    // Init maxedLinesCounter with 0 for each group - avoids undefined
+    var maxedLinesCounter = {
+        "Boss": 0,
+        "IED": 0,
+        "Drop": 0,
+        "Ignore Damage": 0,
+        "Invincible Change": 0,
+        "Skill Increase": 0,
+        "Invincible Time": 0
+    }
+    selectedLines.forEach(l => {
+        if(l in limitedLines){
+            var group = limitedLines[l];
+            maxedLinesCounter[group]++;
+        }
+    });
+    return maxedLinesCounter;
+}
+
+function expandDictionary(options, selectedLines){
+    // TODO: build list of line groups that already hit max
+    var maxedLinesCounter = findMaxedLines(selectedLines);
     var list = [];
     // Build list of <weight> number of cases of each potential line
     Object.keys(options).forEach( k => {
+        // If k is in limitedLines and limitedLines[k] is in maxedLinesCounter, do not add to list
+        if(k in limitedLines){
+            var group = limitedLines[k];
+            if(limitedLineGroup[group] <= maxedLinesCounter[group]){
+                return;
+            }
+        }
         for(let i = 0; i < options[k]; i++){
             list.push(k);
         }
@@ -20,40 +49,41 @@ function expandDictionary(options){
     return list;
 }
 
-function selectLine(options){
-    var expandedList = expandDictionary(options);
+function selectLine(options, selectedLines){
+    var expandedList = expandDictionary(options, selectedLines);
     var index = Math.floor(Math.random() * expandedList.length);
     return expandedList[index];
 }
 
 function generateLines(){
-    // TODO: Certain items cannot have special line combinations (ie: only max 2L boss on wse)
     var itemType = document.getElementById("itemType").value;
     var lineOptions = items[itemType];
-    var lines = "";
+    var selectedLines = [];
     for(let i = 0; i < 6; i++){
         if(i === 0){
             // Prime first line
-                lines += `<div>${selectLine(lineOptions["prime"])}</div>`;
+            selectedLines.push(selectLine(lineOptions["prime"], selectedLines));
         }else if (i === 2 || i === 4){
             // 10% of prime line
             var primeLine = Math.floor(Math.random() * 100) < 10;
             if(primeLine){
-                lines += `<div>${selectLine(lineOptions["prime"])}</div>`;
+                selectedLines.push(selectLine(lineOptions["prime"], selectedLines));
             }else{
-                lines += `<div>${selectLine(lineOptions["secondary"])}</div>`;
+                selectedLines.push(selectLine(lineOptions["secondary"], selectedLines));
             }
         }else{
             // 1% of prime line
             var primeLine = Math.floor(Math.random() * 100) < 1;
             if(primeLine){
-                lines += `<div>${selectLine(lineOptions["prime"])}</div>`;
+                selectedLines.push(selectLine(lineOptions["prime"], selectedLines));
             }else{
-                lines += `<div>${selectLine(lineOptions["secondary"])}</div>`;
+                selectedLines.push(selectLine(lineOptions["secondary"], selectedLines));
             }
         }
-        lines += "\n";
     }
+    var output = selectedLines.reduce((accumulator, value) => {
+        accumulator += `<div>${value}</div>`;
+    });
     var lineOutput = document.getElementById("lines");
-    lineOutput.innerHTML = lines;
+    lineOutput.innerHTML = output;
 }
