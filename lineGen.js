@@ -21,7 +21,7 @@ function findMaxedLines(selectedLines){
         "Invincible Time": 0
     }
     selectedLines.forEach(l => {
-        if(l in limitedLines){
+        if(l in Object.keys(limitedLines)){
             var group = limitedLines[l];
             maxedLinesCounter[group]++;
         }
@@ -36,7 +36,7 @@ function expandDictionary(options, selectedLines){
     // Build list of <weight> number of cases of each potential line
     Object.keys(options).forEach( k => {
         // If k is in limitedLines and limitedLines[k] is in maxedLinesCounter, do not add to list
-        if(k in limitedLines){
+        if(k in Object.keys(limitedLines)){
             var group = limitedLines[k];
             if(limitedLineGroup[group] <= maxedLinesCounter[group]){
                 return;
@@ -63,7 +63,7 @@ function generateLines(){
         if(i === 0){
             // Prime first line
             selectedLines.push(selectLine(lineOptions["prime"], selectedLines));
-        }else if (i === 2 || i === 4){
+        }else if (i === 1 || i === 4){
             // 10% of prime line
             var primeLine = Math.floor(Math.random() * 100) < 10;
             if(primeLine){
@@ -82,7 +82,7 @@ function generateLines(){
         }
     }
     var output = selectedLines.reduce((accumulator, value) => {
-        accumulator += `<div>${value}</div>`;
+        return accumulator + `<div>${value}</div>`;
     });
     var lineOutput = document.getElementById("lines");
     lineOutput.innerHTML = output;
