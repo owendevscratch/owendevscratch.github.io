@@ -21,7 +21,7 @@ function findMaxedLines(selectedLines){
         "Invincible Time": 0
     }
     selectedLines.forEach(l => {
-        if(l in Object.keys(limitedLines)){
+        if(l in limitedLines){
             var group = limitedLines[l];
             maxedLinesCounter[group]++;
         }
@@ -36,7 +36,7 @@ function expandDictionary(options, selectedLines){
     // Build list of <weight> number of cases of each potential line
     Object.keys(options).forEach( k => {
         // If k is in limitedLines and limitedLines[k] is in maxedLinesCounter, do not add to list
-        if(k in Object.keys(limitedLines)){
+        if(k in limitedLines){
             var group = limitedLines[k];
             if(limitedLineGroup[group] <= maxedLinesCounter[group]){
                 return;
