@@ -86,4 +86,8 @@ function generateLines(){
     });
     var lineOutput = document.getElementById("lines");
     lineOutput.innerHTML = output;
+
+    var counter = document.getElementById("counter");
+    var count = parseInt(counter.textContent);
+    counter.textContent = count + 1;
 }
