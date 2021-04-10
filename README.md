@@ -12,5 +12,5 @@ If anyone wants to take this and make it better (honestly wouldn't be too diffic
 Please see the issues for some ideas for what I don't feel like doing, but can easily be done.
 
 Probability sources:
-http://whackybeanz.com/maple/extras/potential-list
-https://strategywiki.org/wiki/MapleStory/Potential_System
+1) http://whackybeanz.com/maple/extras/potential-list
+2) https://strategywiki.org/wiki/MapleStory/Potential_System

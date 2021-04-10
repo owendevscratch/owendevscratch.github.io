@@ -21,7 +21,6 @@ function expandDictionary(options){
 }
 
 function selectLine(options){
-    // TODO: Use weights in random selection
     var expandedList = expandDictionary(options);
     var index = Math.floor(Math.random() * expandedList.length);
     return expandedList[index];
