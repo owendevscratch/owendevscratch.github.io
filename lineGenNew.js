@@ -29,30 +29,47 @@ function findMaxedLines(selectedLines){
     return maxedLinesCounter;
 }
 
-function expandDictionary(options, selectedLines){
-    // TODO: build list of line groups that already hit max
+function selectLine(options, selectedLines){
     var maxedLinesCounter = findMaxedLines(selectedLines);
-    var list = [];
-    // Build list of <weight> number of cases of each potential line
-    Object.keys(options).forEach( k => {
-        // If k is in limitedLines and limitedLines[k] is in maxedLinesCounter, do not add to list
+    // Get max number to generate
+    var max = 0;
+    var skipList = [];
+    Object.keys(options).forEach(k => {
         if(k in limitedLines){
             var group = limitedLines[k];
             if(limitedLineGroup[group] <= maxedLinesCounter[group]){
+                skipList.push(k);
                 return;
             }
         }
-        for(let i = 0; i < options[k]; i++){
-            list.push(k);
-        }
+        max = max + options[k];
     });
-    return list;
-}
-
-function selectLine(options, selectedLines){
-    var expandedList = expandDictionary(options, selectedLines);
-    var index = Math.floor(Math.random() * expandedList.length);
-    return expandedList[index];
+    // This is bad to read
+    var randResult = Math.random() * max;
+    var sum = 0;
+    var selectedLine = '';
+    var found = false;
+    // Find line by weight where random number is <= sum of all lines up to that point (excluding already maxed lines)
+    Object.keys(options).forEach(k => {
+        if(found){
+            return;
+        }
+        if(k in skipList){
+            return;
+        }
+        // Default in case of rounding error
+        if(selectedLine === ''){
+            selectedLine = k;
+        }
+        sum += options[k];
+        if(randResult <= sum){
+            found = true;
+            selectedLine = k;
+            return;
+        };
+    });
+    // Sanity check for 
+    return selectedLine;
 }
 
 function generateLines(){
