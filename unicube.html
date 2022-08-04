@@ -1,0 +1,39 @@
+<head>
+    <script type="text/javascript" src="/itemsNew.js"></script>
+    <script type="text/javascript" src="/lineGenNew2.js"></script>
+</head>
+
+<body onload="setupDropDownAndLines()">
+    <div>
+        <span>Item Type:</span><select id="itemType" onchange="setupLines()"></select>
+    </div>
+    <br />
+    <div>
+        <span>Line 1:</span><select id="line1" class="lineSelector"></select><br/>
+        <span>Line 2:</span><select id="line2" class="lineSelector"></select><br/>
+        <span>Line 3:</span><select id="line3" class="lineSelector"></select><br/>
+    </div>
+    <br/>
+    <div>
+        <button onclick="manualSetLines()">Set Lines</button>
+        <button onclick="pickLine()">Select Line</button>
+        <button onclick="rollLine()" id="roll">Roll</button>
+    </div>
+    <br/>
+    <div>
+        Cubes used: <label id="counter">0</label>
+    </div>
+    <br/>
+    <div>
+        <label id="lines"></label>
+    </div>
+
+    <br/><br/>
+    <div>Notes:</div>
+    <div>Select a line with "Select Line" to enable rolling</div>
+    <div>The line that will be rolled has ** around it</div>
+    <div>You can set the lines directly with "Set Lines" (no limitations like normal cubes cause I'm lazy)</div>
+    <div>Assumes same line roll probability as red cubes</div>
+    <div>Equal chance to select any given line</div>
+    <div>15% chance of prime line for any given roll</div>
+</body>
